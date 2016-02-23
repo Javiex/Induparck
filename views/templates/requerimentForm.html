@@ -1,0 +1,146 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA</label>
+	<div class="col-sm-2">
+		<input type="text"
+		class="form-control"
+		name="date"
+		value="{{'' | currentdate}}"
+		readonly/>
+	</div>
+</div>
+
+<div class="form-group" >
+		<label class="col-sm-2 control-label" >TIPO DE REQUERIMIENTO</label >
+			<div class="col-sm-2" >
+				<select name="tipo"
+				class="form-control"
+				ng-model="selectedRequeriment.tipo"
+				id="tipo" >
+				<option value="1">PRODUCTO</option>
+				<option value="2">SERVICIO</option>
+				</select >
+			</div >
+	</div >
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">SOLICITANTE</label>
+	<div class="col-sm-4">
+		<input type="text"
+		class="form-control"
+		name="solicitante"
+		ng-model="selectedRequeriment.solicitante"
+		required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">SUPERVISOR</label>
+	<div class="col-sm-4">
+		<input type="text"
+		class="form-control"
+		name="supervisor"
+		ng-model="selectedRequeriment.supervisor"
+		required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">DESCRIPCION</label>
+	<div class="col-sm-8">
+		<input type="text"
+		class="form-control"
+		name="descripcion"
+		ng-model="selectedRequeriment.descripcion"
+		required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA LIMITE</label>
+	<div class="col-sm-2">
+		<input type="text"
+		class="form-control"
+		name="fechaEntrega"
+		ng-model="selectedRequeriment.fechaEntrega"
+		bs-datepicker
+		required/>
+	</div>
+</div>
+
+<div >
+	<table class="table table-bordered"
+	infinite-scroll="loadMore()"
+	infinite-scroll-immediate-check="false"
+	infinite-scroll-distance="1">
+	<tr>
+		<th>CANTIDAD</th>
+		<th>ITEM</th>
+		<th>UNIDAD</th>
+		<th>DESCRIPCION</th>
+	</tr>
+
+	<tr ng-repeat="selectedRequeriment in selectedRequeriment.requerimientos" >
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="cantidad"
+					class="inputcol-1"
+					ng-model="selectedRequeriment.cantidad"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="item"
+					class="inputcol-2"
+					ng-model="selectedRequeriment.item"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="unidad"
+					class="inputcol-1"
+					ng-model="selectedRequeriment.unidad"
+					readonly/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="descripcion"
+					class="inputcol-2"
+					ng-model="selectedRequeriment.descripcion"
+					required/>
+				</div>
+			</div>
+		</td>
+	</tr>
+	</table>
+</div>
+
+<div class="pull-right" >
+	<button class="btn btn-success btn-sm"
+	type="button"
+	ng-click="addForm()">
+	<span>+</span >
+	</button >
+	<button class="btn btn-danger btn-sm"
+	type="button"
+	ng-click="restForm()">
+	<span>-</span >
+	</button >
+</div>
+
+</div>
+</div>
+</div>

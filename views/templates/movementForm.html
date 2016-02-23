@@ -1,0 +1,136 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA</label>
+	<div class="col-sm-2">
+		<input type="text" class="form-control" name="date" value="{{'' | currentdate}}" readonly/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">TIPO DE MOVIMIENTO</label>
+	<div class="col-sm-2">
+		<select name="tipo" class="form-control" ng-model="selectedMovement.tipo" ng-change="cargarOperaciones()" id="tipo">
+			<option value="1">ENTRADA</option>
+			<option value="2">SALIDA</option>
+		</select>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">TIPO DE OPERACIÓN</label>
+	<div class="col-sm-2">
+		<select name="operacion" class="form-control" ng-model="selectedMovement.operacion" ng-options="operacion.id_operation as operacion.operation for operacion in listar.operaciones" id="operacion">
+		</select>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">SUPERVISOR</label>
+	<div class="col-sm-4">
+		<input type="text" class="form-control" name="supervisor" ng-model="selectedMovement.supervisor" required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">DESCRIPCION</label>
+	<div class="col-sm-8">
+		<input type="text" class="form-control" name="descripcion" ng-model="selectedMovement.descripcion" required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA LIMITE</label>
+	<div class="col-sm-2">
+		<input type="text" class="form-control" name="fechaEntrega" ng-model="selectedMovement.fechaEntrega" bs-datepicker required/>
+	</div>
+</div>
+
+<div>
+	<table class="table table-bordered" infinite-scroll="loadMore()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
+		<tr>
+			<th>CANTIDAD</th>
+			<th>ITEM</th>
+			<th>UNIDAD</th>
+			<th>DESCRIPCION</th>
+		</tr>
+
+		<tr ng-repeat="selectedMovement in selectedMovement.movimientos">
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" name="cantidad" class="inputcol-1" ng-model="selectedMovement.cantidad" required/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" name="item" class="inputcol-2" ng-model="selectedMovement.item" required/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" name="unidad" class="inputcol-1" ng-model="selectedMovement.unidad" readonly/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" name="descripcion" class="inputcol-2" ng-model="selectedMovement.descripcion" required/>
+					</div>
+				</div>
+			</td>
+
+			<!-- autocompletar -->
+
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<div layout="column" ng-cloak>
+							<md-content class="md-padding">
+								<form ng-submit="$event.preventDefault()" name="searchForm">
+									<p>The following example demonstrates floating labels being used as a normal form element.</p>
+									<div layout-gt-sm="row">
+										<md-input-container flex>
+											<label>Name</label>
+											<input type="text" />
+										</md-input-container>
+										<md-autocomplete flex required md-input-name="autocompleteField" md-input-minlength="2" md-input-maxlength="18" md-no-cache="MovementCreateController.noCache" md-selected-item="MovementCreateController.selectedItem" md-search-text="MovementCreateController.searchText" md-items="item in MovementCreateController.querySearch(MovementCreateController.searchText)"
+													md-item-text="item.display" md-floating-label="Favorite state">
+											<md-item-template>
+												<span md-highlight-text="MovementCreateController.searchText">{{item.display}}</span>
+											</md-item-template>
+										</md-autocomplete>
+									</div>
+								</form>
+							</md-content>
+						</div>
+					</div>
+				</div>
+			</td>
+			<!-- fin de autocompletar -->
+	</tr>
+	</table>
+</div>
+
+<div class="pull-right" >
+	<button class="btn btn-success btn-sm"
+	type="button"
+	ng-click="addForm()">
+	<span>+</span >
+	</button >
+	<button class="btn btn-danger btn-sm"
+	type="button"
+	ng-click="restForm()">
+	<span>-</span >
+	</button >
+</div>
+
+</div>
+</div>
+</div>
+
+
+<!--- --->

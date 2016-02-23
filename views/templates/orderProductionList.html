@@ -1,0 +1,71 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline well well-sm">
+                <span class="fa fa-search"></span>
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           ng-model="search"
+                           placeholder="Buscar orden de pedido..."
+                            />
+                </div>
+
+                <span class="fa fa-sort"></span>
+
+                <div class="form-group">
+                    <select class="form-control"
+                            ng-model="order">
+                        <option value="codeProduct">Codigo (ASC)</option>
+                        <option value="-codeProduct">Codigo (DEC)</option>
+                        <option value="productName">Producto (ASC)</option>
+                        <option value="-productName">Producto (DEC)</option>
+                    </select>
+                </div>
+
+            </form>
+
+            <table class="table table-bordered"
+                   infinite-scroll="loadMore()"
+                   infinite-scroll-immediate-check="false"
+                   infinite-scroll-distance="1">
+
+                <tr>
+                    <th class="scol-1">#</th>
+                    <th class="scol-2">
+                        <div class="sortables">
+                                    <span ng-click="order = 'code'"
+                                          class="fa fa-sort-asc"></span>
+                                    <span ng-click="order = '-code'"
+                                          class="fa fa-sort-desc"></span>
+                        </div>
+                        Codigo OP
+                    </th>
+                    <th class="scol-3">
+                        <div class="sortables">
+									<span ng-click="order = 'name'"
+                                          class="fa fa-sort-asc"></span>
+									<span ng-click="order = '-name'"
+                                          class="fa fa-sort-desc"></span>
+                        </div>
+                        Cliente
+                    </th>
+                    <th class="scol-4">Fecha de entrega</th>
+                </tr>
+                <tr ng-repeat="op in listar.ops" ng-click="selectOp(op2,$index)" ui-sref="productedit({idproduct:producto.id_product})">
+                     <td>{{ $index + 1 }}</td>
+                    <td>{{ op.codeProduct }}</td>
+                    <td>{{ op.nameProduct }}</td>
+                    <td>{{ op.unit1 }}</td>
+                    <td>{{ op.unit2 }}</td>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+
+</div>

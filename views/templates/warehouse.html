@@ -1,0 +1,13 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+
+                    <h1 ng-if="idWarehouse == 1">Almacen Insumos</h1>
+                    <h1 ng-if="idWarehouse == 2">Almacen Productos Terminados</h1>
+                    <h1 ng-if="idWarehouse == 3">Almacen Administrativo</h1>
+
+                     <div ui-view="menuwarehouse"></div>
+                      <ng-include src="'templates/menuWarehouse.html'" ></ng-include >
+        </div>
+    </div>
+</div>

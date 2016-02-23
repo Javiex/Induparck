@@ -1,0 +1,195 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA</label>
+	<div class="col-sm-2">
+		<input type="text"
+		class="form-control"
+		name="date"
+		value="{{'' | currentdate}}" 
+		readonly/>
+	</div>	
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">ORDEN DE PEDIDO</label>
+	<div class="col-sm-3">
+		<input type="text"
+		class="form-control"
+		name="op"
+		ng-model="selectedOrderProduction.op"
+		required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">CLIENTE</label>
+	<div class="col-sm-7">
+		<input type="text"
+		class="form-control"
+		name="cliente"
+		ng-model="selectedOrderProduction.cliente"
+		required/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">FECHA DE ENTREGA</label>
+	<div class="col-sm-3">
+		<input type="text"
+		class="form-control"
+		name="fechaEntrega"
+		ng-model="selectedOrderProduction.fechaEntrega"
+		bs-datepicker
+		required/>
+	</div>
+</div>
+
+<div class="optable">
+	<table class="table table-bordered"
+	infinite-scroll="loadMore()"
+	infinite-scroll-immediate-check="false"
+	infinite-scroll-distance="1">
+	<tr>
+		<th>CANTIDAD</th>
+		<th>DESCRIPCION</th>
+		<th>FONDO</th>
+		<th>ANCHO</th>
+		<th>LARGO</th>
+		<th>ALTO</th>
+		<th>ESPESOR</th>
+		<th>COLOR</th>
+		<th>P. UNIT.</th>	
+		<th>P. TOTAL.</th>
+	</tr>
+
+	<tr ng-repeat="selectedOrderProduction in selectedOrderProduction.pedido_productos" >
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="cantidad"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.cantidad"
+					required/>
+				</div>
+			</div>
+		</td>	
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="producto"
+					class="inputcol-2"
+					ng-model="selectedOrderProduction.producto"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="fondo"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.fondo"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="ancho"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.ancho"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="largo"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.largo"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="alto"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.alto"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="espesor"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.espesor"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="color"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.color"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="punit"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.punit"
+					required/>
+				</div>
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="text"
+					name="ptotal"
+					class="inputcol-1"
+					ng-model="selectedOrderProduction.ptotal"
+					required/>
+				</div>
+			</div>
+		</td>
+	</tr>
+</div>
+
+</table>
+
+<div class="pull-right" >
+	<button class="btn btn-success btn-sm"
+	type="button"
+	ng-click="addForm()">                  
+	<span>+</span >
+	</button >
+	<button class="btn btn-danger btn-sm"
+	type="button"
+	ng-click="restForm()">                  
+	<span>-</span >
+	</button >
+</div>
+
+</div>
+</div>
+</div>

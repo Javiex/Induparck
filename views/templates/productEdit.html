@@ -1,0 +1,35 @@
+<div class="col-md-8 col-md-offset-2" >
+    <form class="form-horizontal"
+         
+          ng-submit="registrarProducto()"
+          novalidate >
+        <div class="panel panel-default" >
+            <div class="panel-heading" >
+
+                {{mode}}
+
+                <div class="pull-right" >
+                    <button class="btn btn-primary btn-sm"
+                            ladda="contacts.isSaving"
+                            type="submit" >
+                        <span ng-if="mode == 'Modificar'" >Guardar</span >
+                        <span ng-if="mode == 'Registrar'" >Crear</span >
+                    </button >
+
+                    <button class="btn btn-danger btn-sm"
+                            ladda="contacts.isDeleting"
+                            ng-if="mode == 'Modificar'"
+                            ng-click="eliminarProducto()" >Eliminar
+                    </button >
+                </div >
+                <div class="clearfix" ></div >
+
+            </div >
+            <div class="panel-body" >
+
+                <ng-include src="'templates/productForm.html'" ></ng-include >
+
+            </div >
+        </div>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+
+            <ng-include src="'templates/menuWarehouse.html'" ></ng-include > 
+            
+            <form class="form-inline well well-sm">
+                <span class="fa fa-search"></span>
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           ng-model="search"
+                           placeholder="Buscar requerimientos..."
+                            />
+                </div>
+                <span class="fa fa-sort"></span>
+
+                <div class="form-group">
+                    <select class="form-control"
+                            ng-model="order">
+                        <option value="codeProduct">Codigo (ASC)</option>
+                        <option value="-codeProduct">Codigo (DEC)</option>
+                        <option value="productName">Producto (ASC)</option>
+                        <option value="-productName">Producto (DEC)</option>
+                    </select>
+                </div>
+
+            </form>
+
+            <table class="table table-bordered"
+                   infinite-scroll="loadMore()"
+                   infinite-scroll-immediate-check="false"
+                   infinite-scroll-distance="1">
+
+                <tr>
+                    <th class="scol-1">#</th>
+                    <th class="scol-2">Fecha</th>
+                    <th class="scol-3">Codigo</th>
+                    <th class="scol-4">Solicitante</th>
+                </tr>
+                <tr ng-repeat="requerimiento in listar.requerimientos" ng-click="selectRequeriment(requerimiento,$index)" ui-sref="requerimentedit({idrequeriment:requerimiento.id_requeriment})">
+                     <td>{{ $index + 1 }}</td>
+                    <td>{{ requerimiento.codeRequeriment }}</td>
+                    <td>{{ requerimiento.dateRequeriment }}</td>
+                    <td>{{ requerimiento.solicitant }}</td>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+
+          <h1>Inventario</h1>
+          
+          <ng-include src="'templates/menuWarehouse.html'" ></ng-include > 
+          
+          <form class="form-inline well well-sm">
+            <span class="fa fa-search"></span>
+
+            <div class="form-group">
+              <input type="text"
+                     class="form-control"
+                     id="name"
+                     ng-model="search"
+                     placeholder="Buscar producto..."
+                    />
+            </div>
+            <span class="fa fa-sort"></span>
+
+            <div class="form-group">
+              <select class="form-control"
+                      ng-model="order">
+                <option value="codeProduct">Codigo (ASC)</option>
+                <option value="-codeProduct">Codigo (DEC)</option>
+                <option value="productName">Producto (ASC)</option>
+                <option value="-productName">Producto (DEC)</option>
+              </select>
+            </div>
+
+          </form>
+
+            <table class="table table-bordered"
+                   infinite-scroll="loadMore()"
+                   infinite-scroll-immediate-check="false"
+                   infinite-scroll-distance="1">
+
+                <tr>
+                    <th class="col-1">#</th>
+                    <th class="col-2">
+                        <div class="sortables">
+                                    <span ng-click="order = 'code'"
+                                          class="fa fa-sort-asc"></span>
+                                    <span ng-click="order = '-code'"
+                                          class="fa fa-sort-desc"></span>
+                        </div>
+                        Codigo
+                    </th>
+                    <th class="col-3">
+                        <div class="sortables">
+									<span ng-click="order = 'name'"
+                                          class="fa fa-sort-asc"></span>
+									<span ng-click="order = '-name'"
+                                          class="fa fa-sort-desc"></span>
+                        </div>
+                        Producto
+                    </th>
+                    <th class="col-4">Unidad</th>
+                    <th class="col-5">Stock</th>
+                </tr>
+                <tr ng-repeat="inventario in listar.inventarios" ng-click="selectInventory(inventario,$index)" ui-sref="inventoryedit({idinventory:inventario.id_inventory})">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ inventario.codeProduct }}</td>
+                    <td>{{ inventario.nameProduct }}</td>
+                    <td>{{ inventario.unit1 }}</td>
+                    <td>{{ inventario.stock }}</td>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
