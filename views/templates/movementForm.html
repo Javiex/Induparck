@@ -17,16 +17,16 @@
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">TIPO DE OPERACIÓN</label>
-	<div class="col-sm-2">
+	<div class="col-sm-4">
 		<select name="operacion" class="form-control" ng-model="selectedMovement.operacion" ng-options="operacion.id_operation as operacion.operation for operacion in listar.operaciones" id="operacion">
 		</select>
 	</div>
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">SUPERVISOR</label>
+	<label class="col-sm-2 control-label">SOLICITANTE</label>
 	<div class="col-sm-4">
-		<input type="text" class="form-control" name="supervisor" ng-model="selectedMovement.supervisor" required/>
+		<input type="text" class="form-control" name="solicitante" ng-model="selectedMovement.solicitante" required/>
 	</div>
 </div>
 
@@ -38,79 +38,155 @@
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">FECHA LIMITE</label>
+	<label class="col-sm-2 control-label">FECHA MOVIMIENTO</label>
 	<div class="col-sm-2">
 		<input type="text" class="form-control" name="fechaEntrega" ng-model="selectedMovement.fechaEntrega" bs-datepicker required/>
 	</div>
 </div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label" for="requerimiento">REQUERIMIENTO</label>
+	<div class="col-md-2">
+		<input type="text" class="form-control" name="requerimiento" ng-model="selectedMovement.requerimiento" />
+	</div>
+
+</div>
+
+<fieldset>
+	<legend>Documento</legend>
+	<div class="form-group">
+		<label class="col-md-1 control-label">DOC.</label>
+		<div class="col-md-1" style="width:110px;">
+			<select name="documento" class="form-control" ng-model="selectedMovement.documento" ng-options="documento as documento.selects for documento in listar.documentos track by documento.codePaymentDocument" id="documento"
+			style="width:60px; padding:0px;" >
+			</select>
+		</div>
+
+		<label class="col-md-1 control-label" for="serie">SERIE</label>
+		<div class="col-sm-1">
+			<input type="text" class="form-control" name="serie" maxlength="3" ng-model="selectedMovement.serie" />
+		</div>
+
+		<label class="col-md-1 control-label" for="numero">NUMERO</label>
+		<div class="col-md-2">
+			<input type="text" class="form-control" name="numero" ng-model="selectedMovement.numero" />
+		</div>
+
+	</div>
+</fieldset>
+
+<fieldset><legend>Orden</legend>
+	<div class="form-group">
+		<label class="col-md-1 control-label">ORDEN</label>
+		<div class="col-md-2">
+			<select
+			name="tiporden"
+			class="form-control"
+			ng-model="selectedMovement.tiporden"
+			id="tiporden"
+			 >
+				<option value="1">OP | Pedido</option>
+				<option value="2">OC | Compra</option>
+				<option value="3">OS | Servicio</option>
+			</select>
+		</div>
+		<label class="col-md-1 control-label">CODIGO</label>
+		<div class="col-md-2">
+			<input type="text" class="form-control" name="codeorden" ng-model="selectedMovement.codeorden" />
+		</div>
+	</div>
+</fieldset>
 
 <div>
 	<table class="table table-bordered" infinite-scroll="loadMore()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
 		<tr>
 			<th>CANTIDAD</th>
 			<th>ITEM</th>
+			<th ng-if="selectedMovement.tipo == '1'">VALOR TOTAL</th>
 			<th>UNIDAD</th>
-			<th>DESCRIPCION</th>
+			<th>STOCK</th>
 		</tr>
 
-		<tr ng-repeat="selectedMovement in selectedMovement.movimientos">
+		<!-- <tr ng-repeat="selectedMovement in selectedMovement.movimientos"> -->
+		<tr ng-repeat="sl in selectedMovement.movimientos">
 			<td>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="text" name="cantidad" class="inputcol-1" ng-model="selectedMovement.cantidad" required/>
+						<input type="number" name="cantidad" class="inputcol-1"
+						min = "0"
+						ng-model="sl.cantidad"
+						ng-if="selectedMovement.tipo == '1'"
+						required/>
+						<input type="number" name="cantidad" class="inputcol-1"
+						min = "0"
+						ng-model="sl.cantidad"
+						max="{{sl.product.stock}}"
+						ng-if="selectedMovement.tipo == '2'"
+						required/>
 					</div>
 				</div>
 			</td>
 			<td>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="text" name="item" class="inputcol-2" ng-model="selectedMovement.item" required/>
-					</div>
-				</div>
-			</td>
-			<td>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<input type="text" name="unidad" class="inputcol-1" ng-model="selectedMovement.unidad" readonly/>
-					</div>
-				</div>
-			</td>
-			<td>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<input type="text" name="descripcion" class="inputcol-2" ng-model="selectedMovement.descripcion" required/>
-					</div>
-				</div>
-			</td>
+						<md-autocomplete flex
+						  md-selected-item="sl.product"
+						  md-search-text="searchText"
+						  md-items="producto in FilterAlumnos(searchText)"
+						  md-item-text="producto.nameProduct"
+						  md-floating-label="Producto"
+						  md-menu-class="autocomplete-custom-template" style="height:40px;">
+							 <md-item-template >
+								  <span class="item-title">
+										<md-icon md-font-icon="fa fa-caret-right"></md-icon>
+								  </span>
+								  <span class="item-metadata">
+										<span class="item-metastat">
+											 <strong>Código</strong> {{ producto.codeProduct }} -
+										</span>
+										<span class="item-metastat">
+											 <strong>Nombre</strong> {{ producto.nameProduct }}
+										</span>
+								  </span>
+							 </md-item-template>
+						</md-autocomplete>
 
-			<!-- autocompletar -->
 
-			<td>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<div layout="column" ng-cloak>
-							<md-content class="md-padding">
-								<form ng-submit="$event.preventDefault()" name="searchForm">
-									<p>The following example demonstrates floating labels being used as a normal form element.</p>
-									<div layout-gt-sm="row">
-										<md-input-container flex>
-											<label>Name</label>
-											<input type="text" />
-										</md-input-container>
-										<md-autocomplete flex required md-input-name="autocompleteField" md-input-minlength="2" md-input-maxlength="18" md-no-cache="MovementCreateController.noCache" md-selected-item="MovementCreateController.selectedItem" md-search-text="MovementCreateController.searchText" md-items="item in MovementCreateController.querySearch(MovementCreateController.searchText)"
-													md-item-text="item.display" md-floating-label="Favorite state">
-											<md-item-template>
-												<span md-highlight-text="MovementCreateController.searchText">{{item.display}}</span>
-											</md-item-template>
-										</md-autocomplete>
-									</div>
-								</form>
-							</md-content>
-						</div>
 					</div>
 				</div>
 			</td>
-			<!-- fin de autocompletar -->
+			<td ng-if="selectedMovement.tipo == '1'">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="number" name="valortotal" class="inputcol-1"
+						min = "0"
+						ng-model="sl.valortotal"
+						style="width:100px;"
+						required/>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12 form-units">
+						{{sl.product.abrevUnit}}
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12 form-units">
+							{{sl.product.stock}}
+					</div>
+				</div>
+			</td>
+			<td ng-if="mode=='Registrar'">
+				<div class="form-group">
+					<div class="col-sm-12" style="text-align: center;">
+						<md-icon md-font-icon="fa fa-minus-circle fa-2x" ng-click="remove($index)" style="color:red;"></md-icon>
+					</div>
+				</div>
+			</td>
 	</tr>
 	</table>
 </div>
@@ -121,16 +197,8 @@
 	ng-click="addForm()">
 	<span>+</span >
 	</button >
-	<button class="btn btn-danger btn-sm"
-	type="button"
-	ng-click="restForm()">
-	<span>-</span >
-	</button >
 </div>
 
 </div>
 </div>
 </div>
-
-
-<!--- --->

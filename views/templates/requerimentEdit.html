@@ -1,8 +1,8 @@
 <div class="col-md-12" >
     <ng-include src="'templates/menuWarehouse.html'" ></ng-include >
-    
-    <form class="form-horizontal" 
-			ng-submit="registrarOrden()" 
+
+    <form class="form-horizontal"
+			ng-submit="registrarRequerimiento()"
 			novalidate>
         <div class="panel panel-default" >
             <div class="panel-heading" >
@@ -14,7 +14,7 @@
                             ladda="contacts.isSaving"
                             type="submit" >
                         <span ng-if="mode == 'Modificar'" >Guardar</span >
-                        <span ng-if="mode == 'Registrar'" >Crear</span >
+                        <span ng-if="mode == 'Registrar'" >Crear Requerimiento</span >
                     </button >
 
                     <button class="btn btn-danger btn-sm"

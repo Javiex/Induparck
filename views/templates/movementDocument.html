@@ -1,0 +1,48 @@
+<div id="printSection" class="col-md-12">
+   <div layout="row" layout-margin layout-fill style="border-bottom: 1px solid grey;">
+      <strong>{{parte}}: {{movement.codeMovementProduct}}</strong>
+      <div style="margin:auto; margin-right: 0px;">
+         <strong>{{almacen}}</strong></div>
+   </div>
+   <div layout="row" layout-margin layout-fill>
+      <strong>OPERACIÓN:</strong><span>{{movement.operation}}</span>
+      <div style="margin:auto; margin-right: 0px;">
+         <strong>FECHA DE MOVIMIENTO:</strong><span> {{movement.movementDate}}</span></div>
+   </div>
+
+   <div layout="row" layout-margin layout-fill>
+      <strong>SOLICITANTE:</strong><span>{{movement.solicitant}}</span>
+   </div>
+   <div layout="row" layout-margin layout-fill ng-if="movement.codeRequeriment">
+      <strong>REQUERIMIENTO:</strong><span>{{movement.codeRequeriment}}</span>
+   </div>
+   <div layout="row" layout-margin layout-fill ng-if="labelorden">
+      <strong>{{labelorden}}</strong><span>{{movement.codeOrder}}</span>
+   </div>
+   <div layout="row" layout-margin layout-fill>
+      <table class="table table-bordered" infinite-scroll="loadMore()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
+         <tr>
+            <th style="width:100px;">CODIGO</th>
+            <th style="max-width: 600px;">PRODUCTO</th>
+            <th style="width:120px;">CANTIDAD</th>
+            <th style="width:100px;">UNIDAD</th>
+         </tr>
+
+         <!-- <tr ng-repeat="selectedMovement in selectedMovement.movimientos"> -->
+         <tr ng-repeat="detail in details">
+            <td>
+               {{detail.codeProduct}}
+            </td>
+            <td style="overflow-wrap: break-word;">
+               {{detail.nameProduct}}
+            </td>
+            <td>
+               {{detail.quantity}}
+            </td>
+            <td style="text-transform:uppercase">
+               {{detail.abrevUnit}}
+            </td>
+         </tr>
+      </table>
+   </div>
+</div>

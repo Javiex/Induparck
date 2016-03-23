@@ -1,0 +1,106 @@
+<md-content role="navigation">
+   <ul class="side-menu" style="padding: 0px;">
+      <li ui-sref-active="active" class="dropdown principal">
+         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMINISTRAR<span class="caret"></span>
+         </a >
+         <ul class="dropdown-menu menuside" role="menu">
+            <li ui-sref-active="active">
+               <a ui-sref="clientlist">Clientes</a>
+            </li>
+            <li ui-sref-active="active">
+               <a ui-sref="employeelist">Empleados</a>
+            </li>
+            <li ui-sref-active="active">
+               <a ui-sref="supplierlist">Proveedores</a>
+            </li>
+            <li class="divider"></li>
+            <li ui-sref-active="active">
+               <a ui-sref="productlist">Productos</a>
+               <ul>
+                  <li ui-sref-active="active">
+                     <a ui-sref="productcreate">Crear Producto</a>
+                  </li>
+               </ul>
+            </li>
+      <li ui-sref-active="active">
+         <a ui-sref="servicelist">Servicios</a>
+         <ul>
+            <li ui-sref-active="active"><a ui-sref="servicecreate">Crear Servicio</a></li>
+         </ul>
+      </li>
+      <li ui-sref-active="active"><a>Almacenes</a>
+         <ul>
+            <li ui-sref-active="active"><a ui-sref="warehousecreate">Crear Almacen</a></li>
+         </ul>
+      </li>
+      <li class="divider"></li>
+      <li ui-sref-active="active">
+         <a>Categorias</a>
+      </li>
+      <li ui-sref-active="active">
+         <a>Unidades de medida</a>
+      </li>
+   </ul>
+   </li>
+   <li ui-sref-active="active" class="dropdown principal">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">VENTAS<span class="caret"></span></a>
+      <ul class="dropdown-menu menuside" role="menu">
+         <li>
+            <a ui-sref="orderproductionlist">Orden de pedido</a>
+            <ul>
+               <li ui-sref-active="active">
+                  <a ui-sref="orderproduction">Crear Orden de Pedido</a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+   <li ui-sref-active="active" class="dropdown principal">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ALMACENES<span class="caret"></span></a>
+      <ul class="dropdown-menu menuside" role="menu">
+         <li ui-sref-active="active">
+            <a ui-sref="warehouse({idwarehouse:1})">Insumos</a>
+         </li>
+         <li ui-sref-active="active">
+            <a ui-sref="warehouse({idwarehouse:2})">Producto Terminados</a>
+         </li>
+         <li ui-sref-active="active">
+            <a ui-sref="warehouse({idwarehouse:3})">Administrativo</a>
+         </li>
+      </ul>
+   </li>
+
+   <li ui-sref-active="active" class="dropdown principal">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">COMPRAS<span class="caret"></span></a>
+      <ul class="dropdown-menu menuside" role="menu">
+         <li ui-sref-active="active">
+            <a>Requerimientos</a>
+         </li>
+         <li ui-sref-active="active">
+            <a>Orden de compra</a>
+         </li>
+         <li ui-sref-active="active">
+            <a>Orden de servicio</a>
+         </li>
+      </ul>
+   </li>
+
+   <li ui-sref-active="active" class="dropdown principal">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PRODUCCION<span class="caret"></span></a>
+      <ul class="dropdown-menu menuside" role="menu">
+         <li>
+            <a href="">Orden de produccion</a>
+         </li>
+         <li>
+            <a href="">Informes</a>
+         </li>
+      </ul>
+   </li>
+
+   <li ui-sref-active="active" class="dropdown principal">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">REPORTES</a>
+   </li>
+
+   </ul>
+
+</md-content>

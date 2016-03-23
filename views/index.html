@@ -2,172 +2,179 @@
 <html lang="en" ng-app="induparck">
 
 <head>
-  <title>INDUPARCK</title>
-  <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/paper.css" rel="stylesheet">
-  <link href="../libs/bootstrap-additions/dist/bootstrap-additions.min.css" rel="stylesheet">
-  <link href="../libs/angularjs-toaster/toaster.min.css" rel="stylesheet">
-  <link href="../libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet">
-  <link href="../libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Estilo de angular material -->
-   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
-  <link href="../css/main.css" rel="stylesheet">
+   <title>INDUPARCK</title>
+   <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="../css/paper.css" rel="stylesheet">
+   <link href="../libs/bootstrap-additions/dist/bootstrap-additions.min.css" rel="stylesheet">
+   <link href="../libs/angularjs-toaster/toaster.min.css" rel="stylesheet">
+   <link href="../libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet">
+   <link href="../libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+   <link href="../libs/angular-material/angular-material.min.css" rel="stylesheet">
+   <link href="../css/main.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="home">INDUPARCK</a>
+
+   <md-sidenav style="overflow:auto" ng-controller="SidenavCtrl" ng-include="'templates/blocks/app_sidenav.html'" class="md-sidenav-left md-whiteframe-z2 bg-cyan-900" md-component-id="left">
+   </md-sidenav>
+      <div layout="column" flex>
+         <md-toolbar ng-include="'templates/blocks/app_header.html'" class="app-header" ng-controller="SidenavCtrl">
+         </md-toolbar>
       </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li ui-sref-active="active" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMINISTRAR<span class="caret"></span></a >
+      <!-- <div class="container">
+
+         <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">INDUPARCK</a>
+         </div>
+         <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <li ui-sref-active="active" class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMINISTRAR<span class="caret"></span></a >
 <ul class="dropdown-menu" role="menu">
 <li ui-sref-active="active">
 <a ui-sref="clientlist">Clientes</a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="employeelist">Empleados</a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="supplierlist">Proveedores</a>
-          </li>
-          <li class="divider"></li>
-          <li ui-sref-active="active">
-            <a ui-sref="productlist">Productos</a>
-            <ul>
-              <li ui-sref-active="active">
-                <a ui-sref="productcreate">Crear Producto</a>
-              </li>
+               </li>
+               <li ui-sref-active="active">
+                  <a ui-sref="employeelist">Empleados</a>
+               </li>
+               <li ui-sref-active="active">
+                  <a ui-sref="supplierlist">Proveedores</a>
+               </li>
+               <li class="divider"></li>
+               <li ui-sref-active="active">
+                  <a ui-sref="productlist">Productos</a>
+                  <ul>
+                     <li ui-sref-active="active">
+                        <a ui-sref="productcreate">Crear Producto</a>
+                     </li>
+                  </ul>
+               </li>
+               <li ui-sref-active="active">
+                  <a ui-sref="servicelist">Servicios</a>
+                  <ul>
+                     <li ui-sref-active="active"><a ui-sref="servicecreate">Crear Servicio</a></li>
+                  </ul>
+               </li>
+               <li ui-sref-active="active"><a>Almacenes</a>
+                  <ul>
+                     <li ui-sref-active="active"><a ui-sref="warehousecreate">Crear Almacen</a></li>
+                  </ul>
+               </li>
+               <li class="divider"></li>
+               <li ui-sref-active="active">
+                  <a>Categorias</a>
+               </li>
+               <li ui-sref-active="active">
+                  <a>Unidades de medida</a>
+               </li>
             </ul>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="servicelist">Servicios</a>
-            <ul>
-              <li ui-sref-active="active"><a ui-sref="servicecreate">Crear Servicio</a></li>
-            </ul>
-          </li>
-          <li ui-sref-active="active"><a>Almacenes</a>
-            <ul>
-              <li ui-sref-active="active"><a ui-sref="warehousecreate">Crear Almacen</a></li>
-            </ul>
-          </li>
-          <li class="divider"></li>
-          <li ui-sref-active="active">
-            <a>Categorias</a>
-          </li>
-          <li ui-sref-active="active">
-            <a>Unidades de medida</a>
-          </li>
-        </ul>
-        </li>
-        <li ui-sref-active="active" class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">VENTAS<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a ui-sref="orderproductionlist">Orden de pedido</a>
-              <ul>
-                <li ui-sref-active="active">
-                  <a ui-sref="orderproduction">
+            </li>
+            <li ui-sref-active="active" class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">VENTAS<span class="caret"></span></a>
+               <ul class="dropdown-menu" role="menu">
+                  <li>
+                     <a ui-sref="orderproductionlist">Orden de pedido</a>
+                     <ul>
+                        <li ui-sref-active="active">
+                           <a ui-sref="orderproduction">
     Crear Orden de Pedido
   </a>
-                </li>
-              </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
             </li>
-          </ul>
-        </li>
-        <li ui-sref-active="active" class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ALMACENES<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+            <li ui-sref-active="active" class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ALMACENES<span class="caret"></span></a>
+               <ul class="dropdown-menu" role="menu">
+                  <li ui-sref-active="active">
+                     <a ui-sref="warehouse({idwarehouse:1})">Insumos</a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a ui-sref="warehouse({idwarehouse:2})">Producto Terminados</a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a ui-sref="warehouse({idwarehouse:3})">Administrativo</a>
+                  </li>
+               </ul>
+            </li>
+            <li ui-sref-active="active" class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">COMPRAS<span class="caret"></span></a>
+               <ul class="dropdown-menu" role="menu">
+                  <li ui-sref-active="active">
+                     <a>Requerimientos</a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a>Orden de compra</a>
+                  </li>
+                  <li ui-sref-active="active">
+                     <a>Orden de servicio</a>
+                  </li>
+               </ul>
+            </li>
+            <li ui-sref-active="active" class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PRODUCCION<span class="caret"></span></a>
+               <ul class="dropdown-menu" role="menu">
+                  <li>
+                     <a href="">Orden de produccion</a>
+                  </li>
+                  <li>
+                     <a href="">Informes</a>
+                  </li>
+               </ul>
+            </li>
             <li ui-sref-active="active">
-              <a ui-sref="warehouse({idwarehouse:1})">Insumos</a>
+               <a>REPORTES</a>
             </li>
-            <li ui-sref-active="active">
-              <a ui-sref="warehouse({idwarehouse:2})">Producto Terminados</a>
-            </li>
-            <li ui-sref-active="active">
-              <a ui-sref="warehouse({idwarehouse:3})">Administrativo</a>
-            </li>
-          </ul>
-        </li>
-        <li ui-sref-active="active" class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">COMPRAS<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li ui-sref-active="active">
-              <a>Requerimientos</a>
-            </li>
-            <li ui-sref-active="active">
-              <a>Orden de compra</a>
-            </li>
-            <li ui-sref-active="active">
-              <a>Orden de servicio</a>
-            </li>
-          </ul>
-        </li>
-        <li ui-sref-active="active" class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PRODUCCION<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="">Orden de produccion</a>
-            </li>
-            <li>
-              <a href="">Informes</a>
-            </li>
-          </ul>
-        </li>
-        <li ui-sref-active="active">
-          <a>REPORTES</a>
-        </li>
-        </ul>
+            </ul>
+         </div>
+
+      </div> -->
+
+   <div class="container main-content">
+
+      <toaster-container></toaster-container>
+
+      <div class="row">
+
+         <div ui-view="main"></div>
+
       </div>
+   </div>
 
-      <!-- <div ui-view="menu"></div>-->
+   <script src="../libs/angular/angular.min.js"></script>
+   <script src="../libs/angular-locale/angular-locale_es-es.js"></script>   
+   <script src="../libs/angular-aria/angular-aria.min.js"></script>
+   <script src="../libs/angular-animate/angular-animate.min.js"></script>
+   <script src="../libs/angular-material/angular-material.min.js"></script>
 
-    </div>
-  </nav>
-
-  <div class="container main-content">
-
-    <toaster-container></toaster-container>
-
-    <div class="row">
-
-      <div ui-view="main"></div>
-
-    </div>
-  </div>
-
-  <script src="../libs/jquery/dist/jquery.min.js"></script>
-  <script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../libs/angular/angular.min.js"></script>
-  <script src="../libs/angular-resource/angular-resource.min.js"></script>
-  <script src="../libs/angular-animate/angular-animate.min.js"></script>
-  <script src="../libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
-  <script src="../libs/spin.js/spin.js"></script>
-  <script src="../libs/angular-spinner/angular-spinner.min.js"></script>
-  <script src="../libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
-  <script src="../libs/ladda/dist/ladda.min.js"></script>
-  <script src="../libs/angular-ladda/dist/angular-ladda.min.js"></script>
-  <script src="../libs/angular-strap/dist/angular-strap.min.js"></script>
-  <script src="../libs/angular-strap/dist/angular-strap.tpl.min.js"></script>
-  <script src="../libs/angularjs-toaster/toaster.min.js"></script>
-  <script src="../libs/ui-router/release/angular-ui-router.min.js"></script>
-  <!-- <script src="../libs/angular-material/angular-material.min.js"></script> -->
-  <!-- dependencies angular material -->
-  <!-- <script src="../libs/angular-messages/angular-messages.js"></script> -->
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script> -->
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script> -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
-  <!-- angular material CDN -->
-  <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+   <script src="../libs/jquery/dist/jquery.min.js"></script>
+   <script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="../libs/angular-resource/angular-resource.min.js"></script>
+   <script src="../libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+   <script src="../libs/spin.js/spin.js"></script>
+   <script src="../libs/angular-spinner/angular-spinner.min.js"></script>
+   <script src="../libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+   <script src="../libs/ladda/dist/ladda.min.js"></script>
+   <script src="../libs/angular-ladda/dist/angular-ladda.min.js"></script>
+   <script src="../libs/angular-strap/dist/angular-strap.min.js"></script>
+   <script src="../libs/angular-strap/dist/angular-strap.tpl.min.js"></script>
+   <script src="../libs/angularjs-toaster/toaster.min.js"></script>
+   <script src="../libs/ui-router/release/angular-ui-router.min.js"></script>
+   <!-- <script src="../libs/angular-material/angular-material.min.js"></script> -->
+   <!-- dependencies angular material -->
+   <!-- <script src="../libs/angular-messages/angular-messages.js"></script> -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script> -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script> -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script> -->
+   <!-- angular material CDN -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script> -->
 
 
-  <script src="../main.js"></script>
-  <script src="../factory/factory.js"></script>
-  <script src="../controllers/controllers.js"></script>
-  <script src="../service.js"></script>
+   <script src="../main.js"></script>
+   <script src="../factory/factory.js"></script>
+   <script src="../controllers/controllers.js"></script>
+   <script src="../service.js"></script>
 </body>
 
 </html>

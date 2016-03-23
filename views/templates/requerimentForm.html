@@ -1,143 +1,124 @@
-<div class="form-group">
+<div class="form-group" ng-if="mode=='Registrar'">
 	<label class="col-sm-2 control-label">FECHA</label>
 	<div class="col-sm-2">
-		<input type="text"
-		class="form-control"
-		name="date"
-		value="{{'' | currentdate}}"
-		readonly/>
+		<input type="text" class="form-control" name="date" value="{{'' | currentdate}}" readonly/>
 	</div>
 </div>
 
-<div class="form-group" >
-		<label class="col-sm-2 control-label" >TIPO DE REQUERIMIENTO</label >
-			<div class="col-sm-2" >
-				<select name="tipo"
-				class="form-control"
-				ng-model="selectedRequeriment.tipo"
-				id="tipo" >
-				<option value="1">PRODUCTO</option>
-				<option value="2">SERVICIO</option>
-				</select >
-			</div >
-	</div >
+<div class="form-group">
+	<label class="col-sm-2 control-label">TIPO DE REQUERIMIENTO</label>
+	<div class="col-sm-2">
+		<select name="tipo" class="form-control" ng-model="selectedRequeriment.tipo" id="tipo" ng-disabled="mode=='Modificar'">
+			<option value="1">PRODUCTO</option>
+			<option value="2">SERVICIO</option>
+		</select>
+	</div>
+</div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">SOLICITANTE</label>
 	<div class="col-sm-4">
-		<input type="text"
-		class="form-control"
-		name="solicitante"
-		ng-model="selectedRequeriment.solicitante"
-		required/>
+		<input type="text" class="form-control" name="solicitante" ng-model="selectedRequeriment.solicitante" ng-disabled="mode=='Modificar'" required/>
 	</div>
 </div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">SUPERVISOR</label>
 	<div class="col-sm-4">
-		<input type="text"
-		class="form-control"
-		name="supervisor"
-		ng-model="selectedRequeriment.supervisor"
-		required/>
+		<input type="text" class="form-control" name="supervisor" ng-model="selectedRequeriment.supervisor" ng-disabled="mode=='Modificar'" required/>
 	</div>
 </div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">DESCRIPCION</label>
 	<div class="col-sm-8">
-		<input type="text"
-		class="form-control"
-		name="descripcion"
-		ng-model="selectedRequeriment.descripcion"
-		required/>
+		<input type="text" class="form-control" name="descripcion" ng-model="selectedRequeriment.descripcion" ng-disabled="mode=='Modificar'" required/>
 	</div>
 </div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">FECHA LIMITE</label>
 	<div class="col-sm-2">
-		<input type="text"
-		class="form-control"
-		name="fechaEntrega"
-		ng-model="selectedRequeriment.fechaEntrega"
-		bs-datepicker
-		required/>
+		<input type="text" class="form-control" name="fechaEntrega" ng-model="selectedRequeriment.fechaEntrega" bs-datepicker ng-disabled="mode=='Modificar'" required/>
 	</div>
 </div>
 
-<div >
-	<table class="table table-bordered"
-	infinite-scroll="loadMore()"
-	infinite-scroll-immediate-check="false"
-	infinite-scroll-distance="1">
-	<tr>
-		<th>CANTIDAD</th>
-		<th>ITEM</th>
-		<th>UNIDAD</th>
-		<th>DESCRIPCION</th>
-	</tr>
+<div>
+	<table class="table table-bordered" infinite-scroll="loadMore()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
+		<tr>
+			<th>CANTIDAD</th>
+			<th>ITEM</th>
+			<th>UNIDAD</th>
+			<th>DESCRIPCION</th>
+		</tr>
+		<tr ng-repeat="selectedRequeriment in selectedRequeriment.requerimientos">
+			<td>
 
-	<tr ng-repeat="selectedRequeriment in selectedRequeriment.requerimientos" >
-		<td>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<input type="text"
-					name="cantidad"
-					class="inputcol-1"
-					ng-model="selectedRequeriment.cantidad"
-					required/>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="number" name="cantidad" class="inputcol-1" ng-model="selectedRequeriment.cantidad" min="0" ng-disabled="mode=='Modificar'" required/>
+					</div>
 				</div>
-			</div>
-		</td>
-		<td>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<input type="text"
-					name="item"
-					class="inputcol-2"
-					ng-model="selectedRequeriment.item"
-					required/>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12" ng-if="mode=='Registrar'">
+						<md-autocomplete flex md-selected-item="selectedRequeriment.product" md-search-text="searchText" md-items="producto in FilterAlumnos(searchText)" md-item-text="producto.nameProduct" md-floating-label="Producto" md-menu-class="autocomplete-custom-template"
+									style="height:40px;">
+							<md-item-template>
+								<span class="item-title">
+									<md-icon md-font-icon="fa fa-caret-right"></md-icon>
+							  </span>
+								<span class="item-metadata">
+									<span class="item-metastat">
+										 <strong>Código</strong> {{ producto.codeProduct }} -
+									</span>
+								<span class="item-metastat">
+										 <strong>Nombre</strong> {{ producto.nameProduct }}
+									</span>
+								</span>
+							</md-item-template>
+						</md-autocomplete>
+					</div>
+					<div class="col-sm-12" ng-if="mode=='Modificar'">
+						{{selectedRequeriment.product}}
+					</div>
 				</div>
-			</div>
-		</td>
-		<td>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<input type="text"
-					name="unidad"
-					class="inputcol-1"
-					ng-model="selectedRequeriment.unidad"
-					readonly/>
+			</td>
+			<td>
+				<!-- {{selectedRequeriment.product}} -->
+				<div class="form-group" ng-if="mode=='Registrar'">
+					<div class="col-sm-12 form-units">
+						{{selectedRequeriment.product.abrevUnit}}
+					</div>
 				</div>
-			</div>
-		</td>
-		<td>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<input type="text"
-					name="descripcion"
-					class="inputcol-2"
-					ng-model="selectedRequeriment.descripcion"
-					required/>
+				<div class="form-group" ng-if="mode=='Modificar'">
+					<div class="col-sm-12 form-units">
+						{{selectedRequeriment.abrevUnit}}
+					</div>
 				</div>
-			</div>
-		</td>
-	</tr>
+			</td>
+			<td>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="text" name="descripcion" class="inputcol-2" ng-model="selectedRequeriment.descripcion" ng-disabled="mode=='Modificar'" />
+					</div>
+				</div>
+			</td>
+			<td ng-if="mode=='Registrar'">
+				<div class="form-group">
+					<div class="col-sm-12" style="text-align: center;">
+						<md-icon md-font-icon="fa fa-minus-circle fa-2x" ng-click="remove($index)" style="color:red;"></md-icon>
+					</div>
+				</div>
+			</td>
+		</tr>
 	</table>
 </div>
 
-<div class="pull-right" >
-	<button class="btn btn-success btn-sm"
-	type="button"
-	ng-click="addForm()">
-	<span>+</span >
-	</button >
-	<button class="btn btn-danger btn-sm"
-	type="button"
-	ng-click="restForm()">
-	<span>-</span >
+<div class="pull-right" ng-if="mode=='Registrar'">
+	<button class="btn btn-success btn-sm" type="button" ng-click="addForm()">
+		<span>+</span >
 	</button >
 </div>
 

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-md-12">
 
-            <ng-include src="'templates/menuWarehouse.html'" ></ng-include > 
-            
+            <ng-include src="'templates/menuWarehouse.html'" ></ng-include >
+
             <form class="form-inline well well-sm">
                 <span class="fa fa-search"></span>
 
@@ -14,17 +14,6 @@
                            ng-model="search"
                            placeholder="Buscar requerimientos..."
                             />
-                </div>
-                <span class="fa fa-sort"></span>
-
-                <div class="form-group">
-                    <select class="form-control"
-                            ng-model="order">
-                        <option value="codeProduct">Codigo (ASC)</option>
-                        <option value="-codeProduct">Codigo (DEC)</option>
-                        <option value="productName">Producto (ASC)</option>
-                        <option value="-productName">Producto (DEC)</option>
-                    </select>
                 </div>
 
             </form>
@@ -40,13 +29,20 @@
                     <th class="scol-3">Codigo</th>
                     <th class="scol-4">Solicitante</th>
                 </tr>
-                <tr ng-repeat="requerimiento in listar.requerimientos" ng-click="selectRequeriment(requerimiento,$index)" ui-sref="requerimentedit({idrequeriment:requerimiento.id_requeriment})">
+                <tr ng-repeat="requerimiento in filteredRequirement = (listar.requerimientos | filter:sensitiveSearch)" ng-click="selectRequeriment(requerimiento,$index)" ui-sref="requerimentedit({idrequeriment:requerimiento.id_requeriment})">
                      <td>{{ $index + 1 }}</td>
+                     <td>{{ requerimiento.dateRequeriment }}</td>
                     <td>{{ requerimiento.codeRequeriment }}</td>
-                    <td>{{ requerimiento.dateRequeriment }}</td>
                     <td>{{ requerimiento.solicitant }}</td>
                 </tr>
 
+                <tr ng-show="filteredRequirement.length == 0" >
+                     <td colspan="4" >
+                        <div class="alert alert-info" >
+                           <p class="text-center" >No se encontraron requerimientos con '{{ search }}'</p >
+                        </div >
+                     </td >
+                  </tr >
 
             </table>
 
